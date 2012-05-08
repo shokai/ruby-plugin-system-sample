@@ -3,8 +3,11 @@
 class String
 
   def method_missing(name, *args)
-    code = open("#{File.dirname(__FILE__)}/plugins/#{name}.rb").read
-    instance_eval code
+    plugin = "#{File.dirname(__FILE__)}/plugins/#{name}.rb"
+    unless File.exists? plugin
+      raise NoMethodError, "undefined method `#{name}' for \"#{self}\":#{self.class}"
+    end
+    instance_eval open(plugin).read
   end
   
 end
@@ -13,3 +16,4 @@ end
 "hello".print
 "hello".say
 "hello".sinu
+"hello".error
