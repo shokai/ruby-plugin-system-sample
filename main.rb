@@ -12,3 +12,4 @@ end
 
 "hello".print
 "hello".say
+"hello".sinu
